@@ -35,29 +35,28 @@
     }
 
     body {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-      body {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+    /* Background image layer */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('bg.png') no-repeat center center/cover;
+      filter: grayscale(100%);
+      opacity: 0.5;
+      z-index: -1;
+    }
 
-/* Background image layer */
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('bg.png') no-repeat center center/cover;
-  filter: grayscale(100%);
-  opacity: 0.5;
-  z-index: -1;
-}
-
+    body {
       background: radial-gradient(1200px 600px at 10% 10%, rgba(212, 175, 55, 0.06), transparent 6%),
                   radial-gradient(1000px 500px at 95% 90%, rgba(255, 204, 102, 0.04), transparent 8%),
                   var(--bg);
@@ -76,6 +75,94 @@ body::before {
       display: flex;
       flex-direction: column;
       gap: var(--gap);
+    }
+
+    /* NEW: Bite & Beans Cafe Header Styling */
+    .cafe-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px 0;
+    }
+
+    .cafe-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--gold1);
+      text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+      line-height: 1;
+      margin-bottom: 5px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .cafe-name::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: var(--gold1);
+    }
+
+    .cafe-subtitle {
+      font-size: 1.2rem;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+    .veg-nonveg {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .veg, .nonveg {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .veg {
+      color: #2e7d32;
+      background: rgba(46, 125, 50, 0.1);
+    }
+
+    .nonveg {
+      color: #c62828;
+      background: rgba(198, 40, 40, 0.1);
+    }
+
+    .veg:hover, .nonveg:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .symbol {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .veg .symbol {
+      background: #4caf50;
+      border: 2px solid #2e7d32;
+    }
+
+    .nonveg .symbol {
+      background: #f44336;
+      border: 2px solid #c62828;
     }
 
     /* Header and Navigation */
@@ -857,18 +944,26 @@ body::before {
 </head>
 <body>
   <div class="container">
+    <!-- NEW: Bite & Beans Cafe Header -->
+    <div class="cafe-header">
+      <img src="logo.png" alt="Logo" class="site-logo">
+      <div class="cafe-name">Bite & Beans</div>
+      <div class="cafe-subtitle">CAFE</div>
+      <p style="margin-top: 15px; color: var(--muted);">Your Go-To Spot For Delicious Eats</p>
+      <div class="veg-nonveg">
+        <div class="veg">
+          <span class="symbol"></span>
+          <span>Veg</span>
+        </div>
+        <div class="nonveg">
+          <span class="symbol"></span>
+          <span>Non Veg</span>
+        </div>
+      </div>
+    </div>
+
     <main class="menu">
       <div class="menu-head">
-        <div>
-          <h2 class="title">
-            Bite and Beans Cafe
-          <img src="logo.png" alt="Logo" class="site-logo">
-          </h2>
-
-          <div class="subtitle"> • Veg — Non Veg</div>
-          <div class="gold-line"></div>
-        </div>
-
         <div class="controls">
           <div class="search" role="search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -895,7 +990,6 @@ body::before {
             <button class="tab" data-cat="Cold Drink">Cold Drink</button>
             <button class="tab" data-cat="Pizza">Pizza</button>
             <button class="tab" data-cat="Maggie">Maggie</button>
-            
           </div>
         </div>
       </div>
